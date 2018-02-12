@@ -1,0 +1,76 @@
+<WisconsinGame>:    
+    canvas:
+        Rectangle:
+            pos: self.center_x - 5, 0
+            size: 10, self.height
+
+
+
+
+    # stimuli: verbal, textual vizual
+    # number (1,2,3,4)
+    # color (blue,red,green,yellow)
+    # shape (cross,circle,triangle,square)
+
+    
+
+    Image:
+        id: instruction
+        pos_hint: {"right":0.42,"top":0.7} 
+        size_hint: 0.4,0.4
+
+        
+    Button:
+        id: b1
+        pos_hint: {"right":0.94,"top":0.99} 
+        size_hint: 0.4,0.15
+        background_normal: "../AppData/c_r_1.jpg"
+        background_down: '../AppData/cyan.jpg'
+        on_release:  root.on_control("b1")
+        on_release: root.button_pressed()
+
+    Button:
+        id: b2
+        pos_hint: {"right":0.94,"top":0.79} 
+        size_hint: 0.4,0.15
+        background_normal: "../AppData/t_g_2.jpg"
+        background_down: '../AppData/cyan.jpg'
+        on_release:  root.on_control("b2")
+        on_release: root.button_pressed()
+
+    Button:
+        id: b3
+        pos_hint: {"right":0.94,"top":0.59} 
+        size_hint: 0.4,0.15
+        background_normal: "../AppData/cr_b_3.jpg"
+        background_down: '../AppData/cyan.jpg'
+        on_release:  root.on_control("b3")
+        on_release: root.button_pressed()
+
+    Button:
+        id: b4
+        pos_hint: {"right":0.94,"top":0.39} 
+        size_hint: 0.4,0.15
+        background_normal: "../AppData/s_y_4.jpg"
+        background_down: '../AppData/cyan.jpg'
+        on_release:  root.on_control("b4")
+        on_release: root.button_pressed()
+
+    Button:
+        id: b5
+        pos_hint: {"right":0.94,"top":0.19} 
+        size_hint: 0.4,0.15
+        background_normal: "../AppData/h_m_5.jpg"
+        background_down: '../AppData/cyan.jpg'
+        on_release:  root.on_control("b5")
+        on_release: root.button_pressed()
+
+
+    Image:
+        id: feedback
+        pos_hint: {"right":0.9,"top":0.9} 
+        size_hint: 0.8,0.8
+        opacity: 0
+
+
+
