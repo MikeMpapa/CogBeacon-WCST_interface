@@ -37,7 +37,7 @@ def readFrames(path):
         frameCounter+=1
 
         if quit:
-            filename = "../Data/"+experiment+"/images/user_"+user_id+'_'+modality+"/data"
+            filename = "../../Wisconsin_Unimodal_Data/"+experiment+"/images/user_"+user_id+'_'+modality+"/data"
             np.save(filename,frame_struct)
             break
 
@@ -322,7 +322,7 @@ class WisconsinGame(FloatLayout):
             self.ids['instruction'].source ='../AppData/wisconsin_textual/'+instruction+'.jpg'
         else :
             self.ids['instruction'].source ='../AppData/wisconsin_auditory/black.jpg'
-            sound = SoundLoader.load('../AppData/wisconsin_auditory/'+self.number+'.wav')     
+            sound = SoundLoader.load('../AppData/wisconsin_auditory/'+instruction+'.wav')     
             sound.play()   
             
         if self.major_stimuli =="number":
@@ -341,9 +341,9 @@ class WisconsinGame(FloatLayout):
     def log_and_terminate(self,_):
         global user_id, email,quit,modality
         quit = True
-        path_save = "../Data/"+experiment+"/"  
-        path_leaderboard =  "../Data/leaderbord.csv"   
-        leaderbord_pickle =  "../Data/leaderbord"     
+        path_save = "../../Wisconsin_Unimodal_Data/"+experiment+"/"  
+        path_leaderboard =  "../../Wisconsin_Unimodal_Data/leaderbord.csv"   
+        leaderbord_pickle =  "../../Wisconsin_Unimodal_Data/leaderbord"     
 
         if not os.path.exists(path_save):
             os.makedirs(path_save)
@@ -406,7 +406,7 @@ if __name__ == '__main__':
     quit = False 
    
     # Create path to stote images if not there 
-    path = '../Data/'+experiment+'/images/'
+    path = '../../Wisconsin_Unimodal_Data/'+experiment+'/images/'
     if not os.path.exists(path):
         os.makedirs(path)
     path = os.path.abspath(path)
