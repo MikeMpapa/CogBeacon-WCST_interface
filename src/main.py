@@ -324,10 +324,7 @@ class WisconsinGame(FloatLayout):
             self.ids['instruction'].source ='../AppData/wisconsin_auditory/black.jpg'
             sound = SoundLoader.load('../AppData/wisconsin_auditory/'+self.number+'.wav')     
             sound.play()   
-            sound = SoundLoader.load('../AppData/wisconsin_auditory/'+self.color+'.wav')     
-            sound.play()   
-            sound = SoundLoader.load('../AppData/wisconsin_auditory/'+self.shape+'.wav')     
-            sound.play()   
+            
         if self.major_stimuli =="number":
             self.stimuli_type = self.number
         elif self.major_stimuli == "shape":
