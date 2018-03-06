@@ -10,6 +10,7 @@ import numpy as np
 import cv2
 import sys,os, cPickle
 from threading import Thread
+from levels import session_sets
 
 kivy.require('1.9.0')
 
@@ -43,6 +44,7 @@ def readFrames(path):
 
     # When everything done, release the capture
     cap.release()
+    sys.exit()
     #cv2.destroyAllWindows()
 
 # Initialize Variables
@@ -57,11 +59,12 @@ class WisconsinGame(FloatLayout):
         self.trial = 0
         round_id = self.trial
 
-        
-        self.total_trials = 6#66  #total trials
+        self.levels_all = session_sets()
+        print   self.levels_all
         self.countdown_time = 6 #seconds (1 -->7)
-        self.level_change_ratio = 3 #6 #trials to change the level
-       
+        self.level_change_ratio = 6 #trials to change the level
+        self.total_trials = len(self.levels_all) * self.level_change_ratio#66  #total trials
+
         self.score = 0
         self.score_total = 0
 
@@ -188,6 +191,7 @@ class WisconsinGame(FloatLayout):
             #self.data.append([self.trial, self.question_in_level,self.level+1, self.score, self.major_modality,self.major_stimuli, self.stimuli_type,self.valid_response, self.error_persistant ,self.clock+1, self.choice,self.perm[0],self.perm[1],self.perm[2],self.audio,self.text,self.visual,self.correct,self.non_persistent_errors, self.persistent_errors]) 
             self.data.append([self.trial, self.question_in_level,self.level+1, self.score,self.major_stimuli, self.stimuli_type, self.valid_response, self.error_persistant ,self.clock+1, self.correct,self.non_persistent_errors, self.persistent_errors]) 
             if self.trial == self.total_trials:
+            #if not self.levels_all:
                 Clock.schedule_once(self.log_and_terminate, 1.5)
             Clock.schedule_once(self.next_round, 1.5)
             return False
@@ -202,10 +206,15 @@ class WisconsinGame(FloatLayout):
     def level_change(self):
         #print self.commands_all
         ids =  np.random.permutation(5)
-        self.level = 0
-        while self.level == 0: #disable level0
-            self.level = np.random.randint(5)
-        
+    # CHANGE LEVELS RANDOMLY
+        #self.level = 0
+        #while self.level == 0: #disable level0
+            #self.level = np.random.randint(5)
+
+    # CHOOSE FROM PRE-SELCTED LEVEL SEQUENCES
+        #if self.levels_all:
+        self.level = self.levels_all.pop(0)        
+
         self.commands = dict(self.commands_all)
         
         if self.level == 3:
@@ -265,8 +274,8 @@ class WisconsinGame(FloatLayout):
         
 
         # Change Stimuli
-        if self.trial%self.level_change_ratio == 1 and self.valid_response == True:
-            
+        if self.trial%self.level_change_ratio == 1 and self.trial > 1:# and self.valid_response == True:
+            print "OOOOOOOOOOOOOOOOOOOOOOO"
             self.major_stimuli = np.random.permutation(self.commands.keys())[0]
 
             self.ids['b1'].disabled = False       
@@ -288,7 +297,7 @@ class WisconsinGame(FloatLayout):
                 self.ids[i].disabled = True
             else:
                 self.ids[i].disabled = False
-        
+
         #update stimulis by securing that each stimuli will represent a different button if possible
         mix_the_command = np.random.permutation(self.level+1)       
 
@@ -331,6 +340,8 @@ class WisconsinGame(FloatLayout):
             self.stimuli_type = self.shape
         else:
             self.stimuli_type = self.color
+
+        print self.stimuli_type, self.trial
 
         #print "Round:",self.trial
         #print self.major_modality
@@ -387,6 +398,7 @@ class WisconsinGame(FloatLayout):
         self.data.append([self.trial, self.question_in_level,self.level+1, self.score,self.major_stimuli, self.stimuli_type, self.valid_response, self.error_persistant ,self.clock+1, self.correct,self.non_persistent_errors, self.persistent_errors]) 
         # terminate session when round limit has been reached
         if self.trial >= self.total_trials:
+        #if not self.levels_all:
             Clock.schedule_once(self.log_and_terminate, 1.5)
         Clock.schedule_once(self.next_round, 1.5)
        
