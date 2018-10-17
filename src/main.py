@@ -11,17 +11,40 @@ import cv2
 import sys,os, cPickle
 from threading import Thread
 from levels import session_sets
-
+import datetime
+import MUSE_server as mps
 kivy.require('1.9.0')
 
 
 
+def readMuse():
+    global server,round_set,user_id, round_id, quit,modality
+   # eeg_name = str(round_set) + "_" + str(round_id) + "_" + str(datetime.datetime.time(datetime.datetime.now()))
+    #print eeg_name
+    intro = open('test', 'w')
+    server = mps.initialize(intro)
+    server.start()
+    server = None
+    round_id = None
+    while(True):
+        if round_id != None:
+            print round_id
+            eeg_name = str(round_set) + "_" + str(round_id)
+             #if server == None:
+
+            #eeg_name = str(round_set) + "_" + str(round_id) + "_" + str(datetime.datetime.time(datetime.datetime.now()))
+            print eeg_name
+            out = open(eeg_name, 'w')
+            server.f = out
+        if quit:
+            server.stop()
+            break
 
 
 def readFrames(path):
 
     global round_set,user_id, round_id, quit,modality
-
+    print "SKATAAAAAAAAAAAA"
     flag = 0
     frameCounter=1
     cap = cv2.VideoCapture(0)
@@ -29,12 +52,13 @@ def readFrames(path):
   
     while(True):
         ret, frame = cap.read()
-        #cv2.imshow('frame',frame)
-        if round_set > len(frame_struct)-1:
-                frame_struct.append([])
-        frame_struct[round_set].append(frame)
-        fname = str(round_set)+"_"+str(round_id)+"_"+str(frameCounter)+".jpg"
-        cv2.imwrite(os.path.join(path, fname), frame)
+        if frameCounter%10 == 0:
+            #cv2.imshow('frame',frame)
+            if round_set > len(frame_struct)-1:
+                    frame_struct.append([])
+            frame_struct[round_set].append(frame)
+            fname = str(round_set)+"_"+str(round_id)+"_"+str(frameCounter)+"_"+str(datetime.datetime.time(datetime.datetime.now()))+".jpg"
+            cv2.imwrite(os.path.join(path, fname), frame)
         frameCounter+=1
 
         if quit:
@@ -46,6 +70,7 @@ def readFrames(path):
     cap.release()
     sys.exit()
     #cv2.destroyAllWindows()
+
 
 # Initialize Variables
 class WisconsinGame(FloatLayout):
@@ -62,7 +87,7 @@ class WisconsinGame(FloatLayout):
         self.levels_all = session_sets()
         print   self.levels_all
         self.countdown_time = 6 #seconds (1 -->7)
-        self.level_change_ratio = 6 #trials to change the level
+        self.level_change_ratio = 2#6 #trials to change the level
         self.total_trials = len(self.levels_all) * self.level_change_ratio#66  #total trials
 
         self.score = 0
@@ -160,11 +185,11 @@ class WisconsinGame(FloatLayout):
     def feedback(self):
         if self.valid_response == True:
             self.ids['feedback'].source = "../AppData/correct.png"
-            sound = SoundLoader.load('../AppData/'+'correct.mp3')     
+            sound = SoundLoader.load('../AppData/'+'correct.wav')
             sound.play()   
         else:    
             self.ids['feedback'].source = "../AppData/wrong.png"
-            sound = SoundLoader.load('../AppData/'+'wrong.mp3')     
+            sound = SoundLoader.load('../AppData/'+'wrong.wav')
             sound.play()   
         self.ids['feedback'].opacity = 1
         Clock.schedule_once(partial(self.chage_opacity,'feedback'), 1)
@@ -354,7 +379,7 @@ class WisconsinGame(FloatLayout):
         quit = True
         path_save = "../../Wisconsin_Unimodal_Data/"+experiment+"/"  
         path_leaderboard =  "../../Wisconsin_Unimodal_Data/leaderbord.csv"   
-        leaderbord_pickle =  "../../Wisconsin_Unimodal_Data/leaderbord"     
+        leaderbord_pickle =  "../../Wisconsin_Unimodal_Data/leaderbord"
 
         if not os.path.exists(path_save):
             os.makedirs(path_save)
@@ -449,7 +474,10 @@ if __name__ == '__main__':
 
     thread2 = Thread( target=readFrames,args=(path,) )
     thread2.start()
-    
+
+    thread3 = Thread(target=readMuse)
+    thread3.start()
+
     thread1.join()
     thread2.join()
 
