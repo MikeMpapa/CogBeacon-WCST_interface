@@ -24,19 +24,20 @@ def readMuse():
     intro = open('test', 'w')
     server = mps.initialize(intro)
     server.start()
-    server = None
     round_id = None
+    prev_round = round_id
     while(True):
-        if round_id != None:
+        if round_id != prev_round:
             print round_id
             eeg_name = str(round_set) + "_" + str(round_id)
              #if server == None:
 
             #eeg_name = str(round_set) + "_" + str(round_id) + "_" + str(datetime.datetime.time(datetime.datetime.now()))
-            print eeg_name
             out = open(eeg_name, 'w')
             server.f = out
+            prev_round = round_id
         if quit:
+            print 'aaaaaaaaaaaa'
             server.stop()
             break
 
