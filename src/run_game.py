@@ -14,5 +14,4 @@ if __name__ == '__main__':
 
 
    args = parser.parse_args()
-
-   print args
+   main.main(args.game_type,str(args.user_id),args.modality,args.store_data)

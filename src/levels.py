@@ -32,8 +32,8 @@ def session_sets():
     return s[num]
 
 def main_game():
-    return [1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4]
-
+    #return [1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4]
+    return[1,2]
 def original_game():
     return [3,3,3,3,3,3,3,3,3,3]
 

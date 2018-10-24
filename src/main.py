@@ -30,16 +30,14 @@ def SelfReport(path):
 
             if quit:
                 list_fatigue =  sorted(list(set(fatigue)))
-                print list_fatigue
                 fatigue_score =  list(np.arange(len(list_fatigue)))
-                print fatigue_score
                 for i in range(len(list_fatigue)):
                      if i == 0:
                          fatigue_history += [fatigue_score[i]] * (list_fatigue[i])
                      elif i < len(list_fatigue)-1:
                          fatigue_history += [fatigue_score[i]] * (list_fatigue[i]-list_fatigue[i-1])
                      else:
-                         fatigue_history += [fatigue_history[-1]]*(round_id-len(fatigue_history))
+                         fatigue_history += [fatigue_score[-1]]*(round_id-len(fatigue_history))
                 if not list_fatigue:
                     fatigue_history = [0]*round_id
 
@@ -54,8 +52,6 @@ def SelfReport(path):
 
 def readMuse(path):
     global server,round_set,user_id, round_id, quit
-   # eeg_name = str(round_set) + "_" + str(round_id) + "_" + str(datetime.datetime.time(datetime.datetime.now()))
-    #print eeg_name
     intro = open('test', 'w')
     server = mps.initialize(intro)
     server.start()
@@ -63,25 +59,18 @@ def readMuse(path):
     prev_round = round_id
     while(True):
         if round_id != prev_round:
-            print round_id
             eeg_name = ('/').join((path,str(round_set) + "_" + str(round_id)))
-             #if server == None:
-
-            #eeg_name = str(round_set) + "_" + str(round_id) + "_" + str(datetime.datetime.time(datetime.datetime.now()))
             out = open(eeg_name, 'w')
             server.f = out
             prev_round = round_id
         if quit:
-            print 'aaaaaaaaaaaa'
             server.stop()
             break
 
 
 def readFrames(path):
 
-    global round_set,user_id, round_id, quit,modality
-    print "SKATAAAAAAAAAAAA"
-    flag = 0
+    global round_set,user_id, round_id, quit,modality, store_data_path
     frameCounter=1
     cap = cv2.VideoCapture(0)
     frame_struct = []
@@ -98,7 +87,7 @@ def readFrames(path):
         frameCounter+=1
 
         if quit:
-            filename = "../../Wisconsin_Unimodal_Data/"+experiment+"/images/user_"+user_id+'_'+modality+"/data"
+            filename = store_data_path+"/images/user_"+user_id+'_'+modality+"/data"
             np.save(filename,frame_struct)
             break
 
@@ -125,9 +114,10 @@ class WisconsinGame(FloatLayout):
         else:
             self.levels_all = main_game()
 
-        print   self.levels_all
+        #print   "LEVELS:",self.levels_all
+
         self.countdown_time = 6 #seconds (1 -->7)
-        self.level_change_ratio = 2 #trials to change the level
+        self.level_change_ratio = 4 #trials to change the level
         self.total_trials = len(self.levels_all) * self.level_change_ratio#66  #total trials
 
         self.score = 0
@@ -272,13 +262,13 @@ class WisconsinGame(FloatLayout):
 
     def level_change(self):
         #print self.commands_all
+
     # CHANGE LEVELS RANDOMLY
         #self.level = 0
         #while self.level == 0: #disable level0
             #self.level = np.random.randint(5)
 
     # CHOOSE FROM PRE-SELCTED LEVEL SEQUENCES
-        #if self.levels_all:
         self.level = self.levels_all.pop(0)
         if self.prev_level == self.level:
             ids = self.prev_ids
@@ -348,7 +338,7 @@ class WisconsinGame(FloatLayout):
 
         # Change Stimuli
         if self.trial%self.level_change_ratio == 1 and self.trial > 1:# and self.valid_response == True:
-            print "OOOOOOOOOOOOOOOOOOOOOOO"
+            #print "CHANGE STIMULI"
             self.major_stimuli = np.random.permutation(self.commands.keys())[0]
 
             self.ids['b1'].disabled = False       
@@ -365,7 +355,6 @@ class WisconsinGame(FloatLayout):
             self.level_change()
 
         for i in ["b1","b2","b3","b4","b5"]:
-            #print i,self.ids[i].disabled
             if i in self.buttons_disabled:
                 self.ids[i].disabled = True
             else:
@@ -414,24 +403,26 @@ class WisconsinGame(FloatLayout):
         else:
             self.stimuli_type = self.color
 
-        print self.stimuli_type, self.trial
+        #print self.stimuli_type, self.trial
 
         #print "Round:",self.trial
         #print self.major_modality
-        #print self.major_stimuli,"OOOOO"
+        #print self.major_stimuli
         #print self.stimuli_type
 
 #Terminate session function
     def log_and_terminate(self,_):
-        global user_id, email,quit,modality
+        global user_id, email,quit,modality,store_data_path
         quit = True
-        path_save = "../../Wisconsin_Unimodal_Data/"+experiment+"/"  
-        path_leaderboard =  "../../Wisconsin_Unimodal_Data/leaderbord.csv"   
-        leaderbord_pickle =  "../../Wisconsin_Unimodal_Data/leaderbord"
+        path_save = store_data_path+'user_performance/'
+        if not os.path.exists(path_save):
+            os.makedirs(path_save)
+        path_leaderboard =  store_data_path + "leaderbord.csv"
+        leaderbord_pickle =  store_data_path+"leaderbord"
 
         if not os.path.exists(path_save):
             os.makedirs(path_save)
-        with open(path_save + modality +'_'+ user_id+'_'+str(self.score_total)+'.csv','w') as f:
+        with open(path_save + 'user_'+ user_id+'_'+modality+'_'+str(self.score_total)+'.csv','w') as f:
                     f.write("Round\tQuestion\tLevel\t Score\tStimuli\tStimuli Type\tResponse\tPersistence\tTime\tCorrect\tNON-PER Errors\tPER Errorsn\n")
                     for sample in self.data:
                         f.write((('\t').join([str(i) for i in sample])+'\n'))
@@ -482,70 +473,68 @@ class WisconsinApp(App):
 
 
 
-if __name__ == '__main__':
-    #Config.set('graphics', 'width', str(4000))
-    #Config.set('graphics', 'height', str(2000))
+
+
+def main(game,user,stimuli,data_path):
+    global user_id, email, modality, round_set, round_id, quit, game_type,store_data_path
+
+    # Config.set('graphics', 'width', str(4000))
+    # Config.set('graphics', 'height', str(2000))
     Config.set('graphics', 'width', str(1000))
     Config.set('graphics', 'height', str(1000))
 
-    #Parameter initialization
-    global  user_id, email, modality, experiment,round_set,round_id,quit,game_type
-
-    game_type = sys.argv[3]
-    experiment = "initial_study"
+    # Parameter initialization
+    store_data_path =data_path
+    game_type = game
     round_set = 0
-    quit = False 
-   
-    # Create path to stote images if not there 
-    path_im = '../../Wisconsin_Unimodal_Data/'+experiment+'/images/'
+    quit = False
+
+    # Create path to stote images if not there
+    path_im = store_data_path+ '/images/'
     if not os.path.exists(path_im):
         os.makedirs(path_im)
         path_im = os.path.abspath(path_im)
 
-    path_eeg = '../../Wisconsin_Unimodal_Data/' + experiment + '/eeg/'
+    path_eeg = store_data_path + '/eeg/'
     if not os.path.exists(path_eeg):
         os.makedirs(path_eeg)
         path_eeg = os.path.abspath(path_eeg)
 
-    path_self = '../../Wisconsin_Unimodal_Data/' + experiment + '/fatigue_self_report/'
+    path_self = store_data_path + '/fatigue_self_report/'
     if not os.path.exists(path_self):
-            os.makedirs(path_self)
-            path_self = os.path.abspath(path_self)
+        os.makedirs(path_self)
+        path_self = os.path.abspath(path_self)
 
-    email = sys.argv[2] #user email
-    modality = sys.argv[1] #modality to use 
+    email = user  # user email
+    modality = stimuli  # stimuli to use
 
-    #Find the ID of the current User
-    dirs = [i for i in os.listdir(path_im) if os.path.isdir(path_im+'/'+i) and modality in i]
-    print dirs
+    # Find the ID of the current User
+    dirs = [i for i in os.listdir(path_im) if os.path.isdir(path_im + '/' + i) and modality in i]
     user_id = str(len(dirs))
-   
 
-    if modality not in ['v','t','a']:
-        raise NameError('Invalid modality ID given')
 
-    #Create directory to store current User's images
-    foldername = "/user_"+user_id+'_'+modality+"/"
-    path_im = path_im+foldername
+    # Create directory to store current User's images
+    foldername = "/user_" + user_id + '_' + modality + "/"
+    path_im = path_im + foldername
     if not os.path.exists(path_im):
         os.makedirs(path_im)
     path_eeg = path_eeg + foldername
     if not os.path.exists(path_eeg):
         os.makedirs(path_eeg)
 
-    print "User: "+user_id, "ID: " + email
+    print "User: " + user_id, "ID: " + email
 
-    #Run game and recording into threads
+    # Run game and recording into threads
     thread1 = Thread(target=WisconsinApp().run)
     thread1.start()
 
-    thread2 = Thread( target=readFrames,args=(path_im,) )
+    thread2 = Thread(target=readFrames, args=(path_im,))
     thread2.start()
 
-    thread3 = Thread(target=readMuse,args=(path_eeg,) )
+    thread3 = Thread(target=readMuse, args=(path_eeg,))
     thread3.start()
 
-    thread4 = Thread(target=SelfReport, args=(path_self+foldername[:-1],))
+    thread4 = Thread(target=SelfReport, args=(path_self + foldername[:-1],))
     thread4.start()
 
     thread1.join()
@@ -553,3 +542,6 @@ if __name__ == '__main__':
     thread3.join()
     thread4.join()
 
+
+if __name__ == '__main__':
+   main('m','test_user','v','../../Wisconsin_Unimodal_Data/')
