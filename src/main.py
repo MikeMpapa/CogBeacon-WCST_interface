@@ -1,24 +1,59 @@
 import kivy
 from kivy.app import App
-from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.audio import SoundLoader
 from kivy.clock import Clock
 from functools import partial
-import time
 import numpy as np
 import cv2
 import sys,os, cPickle
 from threading import Thread
-from levels import session_sets
+from levels import main_game,original_game
 import datetime
 import MUSE_server as mps
+from kivy.config import Config
+import keyboard
 kivy.require('1.9.0')
 
 
+def SelfReport(path):
+    global server,round_set,user_id, round_id, quit
 
-def readMuse():
-    global server,round_set,user_id, round_id, quit,modality
+    fatigue_history = []
+    fatigue = []
+    round_id = None
+
+    while (True):  # making a loop
+
+            if keyboard.is_pressed('a'):  # if key 'q' is pressed
+                fatigue.append(round_id-1)
+
+            if quit:
+                list_fatigue =  sorted(list(set(fatigue)))
+                print list_fatigue
+                fatigue_score =  list(np.arange(len(list_fatigue)))
+                print fatigue_score
+                for i in range(len(list_fatigue)):
+                     if i == 0:
+                         fatigue_history += [fatigue_score[i]] * (list_fatigue[i])
+                     elif i < len(list_fatigue)-1:
+                         fatigue_history += [fatigue_score[i]] * (list_fatigue[i]-list_fatigue[i-1])
+                     else:
+                         fatigue_history += [fatigue_history[-1]]*(round_id-len(fatigue_history))
+                if not list_fatigue:
+                    fatigue_history = [0]*round_id
+
+                with open(path + '.csv', 'w') as f:
+                   for i in fatigue_history:
+                     f.write((str(i)+'\n'))
+                f.close()
+                break
+
+
+
+
+def readMuse(path):
+    global server,round_set,user_id, round_id, quit
    # eeg_name = str(round_set) + "_" + str(round_id) + "_" + str(datetime.datetime.time(datetime.datetime.now()))
     #print eeg_name
     intro = open('test', 'w')
@@ -29,7 +64,7 @@ def readMuse():
     while(True):
         if round_id != prev_round:
             print round_id
-            eeg_name = str(round_set) + "_" + str(round_id)
+            eeg_name = ('/').join((path,str(round_set) + "_" + str(round_id)))
              #if server == None:
 
             #eeg_name = str(round_set) + "_" + str(round_id) + "_" + str(datetime.datetime.time(datetime.datetime.now()))
@@ -79,16 +114,20 @@ class WisconsinGame(FloatLayout):
     def __init__(self, **kwargs):
         super(WisconsinGame, self).__init__(**kwargs)
         
-        global round_set,round_id,modality
+        global round_set,round_id,modality,game_type
         round_set = 0
 
         self.trial = 0
         round_id = self.trial
 
-        self.levels_all = session_sets()
+        if game_type =='o':
+            self.levels_all = original_game()
+        else:
+            self.levels_all = main_game()
+
         print   self.levels_all
         self.countdown_time = 6 #seconds (1 -->7)
-        self.level_change_ratio = 2#6 #trials to change the level
+        self.level_change_ratio = 2 #trials to change the level
         self.total_trials = len(self.levels_all) * self.level_change_ratio#66  #total trials
 
         self.score = 0
@@ -126,6 +165,8 @@ class WisconsinGame(FloatLayout):
         self.ids['b5'].disabled = True     
 
         self.level = 0 #gamelevel
+        self.prev_level = None
+        self.prev_ids = None
         self.buttons_disabled = []
         self.level_change()
 
@@ -170,7 +211,7 @@ class WisconsinGame(FloatLayout):
        
         if self.valid_response == True and self.question_in_level >2:
             #print "Clock",self.clock
-            self.score = float(self.level+1)/float((self.clock+1)*(self.question_in_level-2)) 
+            self.score = float(self.level+1)/float((self.clock+1)*(self.question_in_level-2))
             self.score_total += self.score
             #print "SCORE", self.score
             #print "SCORE TOTAL", self.score_total
@@ -231,7 +272,6 @@ class WisconsinGame(FloatLayout):
 
     def level_change(self):
         #print self.commands_all
-        ids =  np.random.permutation(5)
     # CHANGE LEVELS RANDOMLY
         #self.level = 0
         #while self.level == 0: #disable level0
@@ -239,7 +279,14 @@ class WisconsinGame(FloatLayout):
 
     # CHOOSE FROM PRE-SELCTED LEVEL SEQUENCES
         #if self.levels_all:
-        self.level = self.levels_all.pop(0)        
+        self.level = self.levels_all.pop(0)
+        if self.prev_level == self.level:
+            ids = self.prev_ids
+        else:
+            ids = np.random.permutation(5)
+            self.prev_ids = ids
+
+        self.prev_level = self.level
 
         self.commands = dict(self.commands_all)
         
@@ -436,24 +483,40 @@ class WisconsinApp(App):
 
 
 if __name__ == '__main__':
-   
+    #Config.set('graphics', 'width', str(4000))
+    #Config.set('graphics', 'height', str(2000))
+    Config.set('graphics', 'width', str(1000))
+    Config.set('graphics', 'height', str(1000))
+
     #Parameter initialization
-    global  user_id, email, modality, experiment,round_set,round_id,quit
+    global  user_id, email, modality, experiment,round_set,round_id,quit,game_type
+
+    game_type = sys.argv[3]
     experiment = "initial_study"
     round_set = 0
     quit = False 
    
     # Create path to stote images if not there 
-    path = '../../Wisconsin_Unimodal_Data/'+experiment+'/images/'
-    if not os.path.exists(path):
-        os.makedirs(path)
-    path = os.path.abspath(path)
+    path_im = '../../Wisconsin_Unimodal_Data/'+experiment+'/images/'
+    if not os.path.exists(path_im):
+        os.makedirs(path_im)
+        path_im = os.path.abspath(path_im)
+
+    path_eeg = '../../Wisconsin_Unimodal_Data/' + experiment + '/eeg/'
+    if not os.path.exists(path_eeg):
+        os.makedirs(path_eeg)
+        path_eeg = os.path.abspath(path_eeg)
+
+    path_self = '../../Wisconsin_Unimodal_Data/' + experiment + '/fatigue_self_report/'
+    if not os.path.exists(path_self):
+            os.makedirs(path_self)
+            path_self = os.path.abspath(path_self)
 
     email = sys.argv[2] #user email
     modality = sys.argv[1] #modality to use 
 
     #Find the ID of the current User
-    dirs = [i for i in os.listdir(path) if os.path.isdir(path+'/'+i) and modality in i]
+    dirs = [i for i in os.listdir(path_im) if os.path.isdir(path_im+'/'+i) and modality in i]
     print dirs
     user_id = str(len(dirs))
    
@@ -463,22 +526,30 @@ if __name__ == '__main__':
 
     #Create directory to store current User's images
     foldername = "/user_"+user_id+'_'+modality+"/"
-    path = path+foldername
-    if not os.path.exists(path):
-        os.makedirs(path)
+    path_im = path_im+foldername
+    if not os.path.exists(path_im):
+        os.makedirs(path_im)
+    path_eeg = path_eeg + foldername
+    if not os.path.exists(path_eeg):
+        os.makedirs(path_eeg)
 
-    print "User: "+user_id, "Email: " + email
+    print "User: "+user_id, "ID: " + email
 
     #Run game and recording into threads
     thread1 = Thread(target=WisconsinApp().run)
     thread1.start()
 
-    thread2 = Thread( target=readFrames,args=(path,) )
+    thread2 = Thread( target=readFrames,args=(path_im,) )
     thread2.start()
 
-    thread3 = Thread(target=readMuse)
+    thread3 = Thread(target=readMuse,args=(path_eeg,) )
     thread3.start()
+
+    thread4 = Thread(target=SelfReport, args=(path_self+foldername[:-1],))
+    thread4.start()
 
     thread1.join()
     thread2.join()
+    thread3.join()
+    thread4.join()
 

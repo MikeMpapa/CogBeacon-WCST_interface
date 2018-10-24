@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aaad3f0d-09d6-45ff-a98d-3721f308af65" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/run_game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/0_0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/0_2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/1_3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/1_4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/2_5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/2_6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/2_7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/3_8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/levels.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/levels.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/run_muse.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/run_muse.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,53 +27,54 @@
     <session id="-1975004739">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.0" value="3" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.0" value="4" />
           <entry key="project.open.time.2" value="2" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.open.time.3" value="4" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="040063" value="1" />
-          <entry key="0_0" value="6" />
-          <entry key="0_1" value="4" />
-          <entry key="0_2" value="3" />
+          <entry key="0_0" value="12" />
+          <entry key="0_1" value="10" />
+          <entry key="0_2" value="8" />
           <entry key="0_3" value="3" />
-          <entry key="1_3" value="2" />
-          <entry key="1_4" value="2" />
+          <entry key="1_3" value="9" />
+          <entry key="1_4" value="6" />
           <entry key="1_5" value="1" />
           <entry key="221413" value="1" />
-          <entry key="2_5" value="1" />
-          <entry key="2_6" value="2" />
-          <entry key="2_7" value="1" />
+          <entry key="2_5" value="7" />
+          <entry key="2_6" value="5" />
+          <entry key="2_7" value="6" />
           <entry key="352373" value="2" />
-          <entry key="3_7" value="2" />
-          <entry key="3_8" value="4" />
+          <entry key="3_7" value="8" />
+          <entry key="3_8" value="10" />
           <entry key="TEST-MUSE" value="2" />
-          <entry key="py" value="7" />
-          <entry key="sh" value="1" />
-          <entry key="test" value="13" />
+          <entry key="kv" value="1" />
+          <entry key="py" value="15" />
+          <entry key="sh" value="2" />
+          <entry key="test" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Bash" value="1" />
-          <entry key="PLAIN_TEXT" value="50" />
-          <entry key="Python" value="7" />
+          <entry key="Bash" value="2" />
+          <entry key="PLAIN_TEXT" value="112" />
+          <entry key="Python" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="540" />
+          <entry key="py" value="2429" />
           <entry key="sh" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Bash" value="2" />
-          <entry key="Python" value="540" />
+          <entry key="Python" value="2429" />
         </counts>
       </usages-collector>
     </session>
@@ -73,8 +84,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="841">
-              <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+            <state relative-caret-position="417">
+              <caret line="488" column="47" lean-forward="true" selection-start-line="488" selection-start-column="47" selection-end-line="488" selection-end-column="47" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -83,15 +94,38 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MUSE_server.py">
+        <entry file="file://$PROJECT_DIR$/src/run_game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="696">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="29">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/levels.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="986">
+              <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <marker date="1540318980788" expanded="true" signature="1905:1941" ph="..." />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/video_facial_landmarks.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="25" column="41" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/score.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -113,6 +147,14 @@
       <find>quit</find>
       <find>log_and_terminate</find>
       <find>server</find>
+      <find>level_change_ratio</find>
+      <find>score</find>
+      <find>csv</find>
+      <find>self</find>
+      <find>level_change</find>
+      <find>session_</find>
+      <find>sess</find>
+      <find>experiment</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -121,19 +163,20 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/levels.py" />
         <option value="$PROJECT_DIR$/src/check_muse.py" />
         <option value="$PROJECT_DIR$/src/run_muse.sh" />
         <option value="$PROJECT_DIR$/src/MUSE_server.py" />
+        <option value="$PROJECT_DIR$/src/levels.py" />
         <option value="$PROJECT_DIR$/src/main.py" />
+        <option value="$PROJECT_DIR$/src/run_game.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1988" />
-    <option name="y" value="45" />
-    <option name="width" value="1852" />
-    <option name="height" value="2115" />
+    <option name="x" value="1470" />
+    <option name="y" value="16" />
+    <option name="width" value="1920" />
+    <option name="height" value="2132" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -160,7 +203,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/run_game.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -175,7 +218,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.RunWisconsin">
+    <configuration name="RunWisconsin" type="PythonConfigurationType" factoryName="Python">
+      <module name="wisconsin_unimodal" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv2/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/run_game.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="check_kinect" type="PythonConfigurationType" factoryName="Python">
       <module name="wisconsin_unimodal" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -197,6 +261,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.check_kinect" />
+      <item itemvalue="Python.RunWisconsin" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -212,15 +280,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="137" y="-8" width="3703" height="2168" extended-state="6" />
+    <frame x="-1" y="10" width="3842" height="2151" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15546449" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16671056" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32952183" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32952183" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32952183" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.35550934" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -233,6 +301,25 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16671056" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32952183" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.11486486" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32952183" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -247,79 +334,72 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
           <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/0_3" />
+    <entry file="file://$PROJECT_DIR$/src/1_5" />
+    <entry file="file://$PROJECT_DIR$/src/2_7" />
+    <entry file="file://$PROJECT_DIR$/src/1_4" />
+    <entry file="file://$PROJECT_DIR$/src/test">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MUSE_server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/run_muse.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="87">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/2_6" />
+    <entry file="file://$PROJECT_DIR$/src/2_5" />
+    <entry file="file://$PROJECT_DIR$/src/0_0" />
+    <entry file="file://$PROJECT_DIR$/src/0_2" />
+    <entry file="file://$PROJECT_DIR$/src/1_3" />
+    <entry file="file://$PROJECT_DIR$/src/3_8" />
+    <entry file="file://$PROJECT_DIR$/src/3_7" />
+    <entry file="file://$PROJECT_DIR$/src/0_1" />
     <entry file="file://$PROJECT_DIR$/src/levels.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="899">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/0_0">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/0_1">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/0_2">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/0_3">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/1_4">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/1_5">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/2_5">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/2_6">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/2_7">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/3_7">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MUSE_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="986">
+          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1540318980788" expanded="true" signature="1905:1941" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test">
+    <entry file="file://$PROJECT_DIR$/src/video_facial_landmarks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="25" column="41" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/score.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/3_8">
+    <entry file="file://$PROJECT_DIR$/src/wisconsin.kv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/1_3">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/run_game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="841">
-          <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+        <state relative-caret-position="417">
+          <caret line="488" column="47" lean-forward="true" selection-start-line="488" selection-start-column="47" selection-end-line="488" selection-end-column="47" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
