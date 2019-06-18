@@ -12,7 +12,7 @@
 ### Muse Dependencies
 Install Muse tools: http://dev.choosemuse.com/tools
 Install Python SDK Tools: http://das.nasophon.de/pyliblo/
-Note: since we use 64-bit system for TensorFlow, check the following link for MuseSDK on 64-bit system: http://forum.choosemuse.com/t/issues-running-muselab-and-muse-io/112/20 or https://github.com/elnn/tomato/blob/master/README.md
+Note: since we use 64-bit Linux OS, check the following link for MuseSDK on 64-bit system: http://forum.choosemuse.com/t/issues-running-muselab-and-muse-io/112/20 or https://github.com/elnn/tomato/blob/master/README.md
 
 
 For additional help please contact the author at: michalis.papakostas@mavs.uta.edu or mpapakos@umich.edu
