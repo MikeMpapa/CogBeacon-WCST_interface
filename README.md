@@ -1,18 +1,3 @@
-
-## Paper & Citation
-Papakostas, Michalis, Akilesh Rajavenkatanarayanan, and Fillia Makedon. "CogBeacon: A Multi-Modal Dataset and Data-Collection Platform for Modeling Cognitive Fatigue." Technologies 7.2 (2019): 46.
-
-@article{papakostas2019cogbeacon,
-  title={CogBeacon: A Multi-Modal Dataset and Data-Collection Platform for Modeling Cognitive Fatigue},
-  author={Papakostas, Michalis and Rajavenkatanarayanan, Akilesh and Makedon, Fillia},
-  journal={Technologies},
-  volume={7},
-  number={2},
-  pages={46},
-  year={2019},
-  publisher={Multidisciplinary Digital Publishing Institute}
-}
-
 # CogBeacon - Gamified Variations of the Wisconsin Card Sorting Test
 
 ### To connnect other sensors: 
